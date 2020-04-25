@@ -39,4 +39,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REF: ${{ github.ref }}
         run: |
+          hub release delete latest
           hub release create --copy -a build/ue1.pdf -m "$GITHUB_REF" latest
