@@ -1,9 +1,7 @@
-name: Build PDF files (workflow)
 on: [push]
 
 jobs:
   build:
-    name: Build PDF files (job)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
