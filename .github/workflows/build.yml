@@ -35,5 +35,7 @@ jobs:
           name: PDF files
           path: build
       - name: Create release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           hub release create --copy -F build/ue1.pdf latest
