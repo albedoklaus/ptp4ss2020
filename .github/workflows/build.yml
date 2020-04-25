@@ -39,10 +39,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REF: ${{ github.ref }}
         run: |
-          hub release delete "build/ue1.pdf" || true
-          git tag -d "build/ue1.pdf" || true
-          git push -d "https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}" "build/ue1.pdf" || true
           hub release delete latest || true
           git tag -d latest || true
           git push -d "https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}" latest || true
-          hub release create --copy -a "build/ue1.pdf" -a "build/README.pdf" -m "Latest release" -m "$GITHUB_REF" latest
+          hub release create --copy -a "build/ue1.pdf" -a "build/README.pdf" -m "Latest release" -m "https://github.com/${GITHUB_REPOSITORY}/runs/${GITHUB_RUN_ID}" latest
