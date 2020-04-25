@@ -27,10 +27,12 @@ jobs:
           #sudo dpkg -i "$filename"
       - name: Build PDF files
         run: |
+          texliveonfly --help
           for texfile in *.tex
           do
-            latexmk -pdf *.tex
+            texliveonfly --compiler=pdflatex --arguments="-draftmode -interaction=nonstopmode" "$texfile"
           done
+          latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode -halt-on-error *.tex"
           mkdir -p build
           mv *.pdf build
           #mkdir build
