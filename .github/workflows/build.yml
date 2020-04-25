@@ -11,12 +11,17 @@ jobs:
         uses: actions/checkout@v2
       - name: Install pandoc
         run: |
-          sudo apt install texlive-latex-base
+          temp="$(mktemp -d)"
+          #sudo apt install texlive-latex-base
+          url=http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
+          wget -qO - "$url" | tar --strip-components=1 -C "$temp" -xzvf -
+          scheme="scheme-basic"
+          printf '%s\n' "selected_scheme $scheme" "instopt_adjustpath 1" | tee -a "$temp/texlive.profile"
+          (cd "$temp" && ./install-tl -profile texlive.profile)
           url="$(wget -qO - https://api.github.com/repos/jgm/pandoc/releases/latest | tr '"' '\n' | grep '.*/download/.*-amd64.deb')"
-          filename="pandoc-latest-amd64.deb"
+          filename="$temp/pandoc-latest-amd64.deb"
           wget -O "$filename" "$url"
           sudo dpkg -i "$filename"
-          rm "$filename"
       - name: Build PDF files
         run: |
           for mdfile in *.md
