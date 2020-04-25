@@ -54,9 +54,9 @@ jobs:
           hub release delete latest || true
           git tag -d latest || true
           git push -d "https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}" latest || true
-          #hub release create --copy -a "build/ue1.pdf" -a "build/README.pdf" -m "Latest release" -m "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" latest
-          #hub release create --copy -a "build/Zettel1.pdf" -m "Latest release" -m "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" latest
-          hub release create -m "Latest release" -m "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" latest
+          #hub release create -a "build/ue1.pdf" -a "build/README.pdf" -m "Latest release" -m "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" latest
+          #hub release create -a "build/Zettel1.pdf" -m "Latest release" -m "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" latest
+          hub release create -m "Latest release" -m "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" --prerelease latest
           for pdffile in build/*.pdf
           do
             hub release edit -m "" -a "$pdffile" latest
