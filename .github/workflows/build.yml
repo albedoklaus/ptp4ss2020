@@ -34,3 +34,6 @@ jobs:
         with:
           name: PDF files
           path: build
+      - name: Create release
+        run: |
+          hub release create --copy -F build/ue1.pdf latest
