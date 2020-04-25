@@ -40,4 +40,4 @@ jobs:
           GITHUB_REF: ${{ github.ref }}
         run: |
           hub release delete latest
-          hub release create --copy -a build/*.pdf -m "Latest release" -m "$GITHUB_REF" latest
+          hub release create --copy -a "build/*.pdf" -m "Latest release" -m "$GITHUB_REF" latest
