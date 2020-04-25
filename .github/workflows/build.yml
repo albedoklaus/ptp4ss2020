@@ -40,4 +40,6 @@ jobs:
           GITHUB_REF: ${{ github.ref }}
         run: |
           hub release delete latest || true
+          git tag -d latest || true
+          git push -d "https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}" latest || true
           hub release create --copy -a "build/ue1.pdf" -a "build/README.pdf" -m "Latest release" -m "$GITHUB_REF" latest
