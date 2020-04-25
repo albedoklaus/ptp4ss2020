@@ -38,4 +38,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          hub release create --copy -F build/ue1.pdf latest
+          hub release create --copy -a build/ue1.pdf latest
