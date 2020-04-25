@@ -27,6 +27,7 @@ jobs:
           #sudo dpkg -i "$filename"
       - name: Build PDF files
         run: |
+          find / -name latexmk
           texliveonfly --help
           for texfile in *.tex
           do
