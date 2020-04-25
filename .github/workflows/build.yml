@@ -12,6 +12,12 @@ jobs:
           url="$(wget -qO - https://api.github.com/repos/jgm/pandoc/releases/latest | tr '"' '\n' | grep '.*/download/.*-amd64.deb')"
           filename="pandoc-latest-amd64.deb"
           wget -O "$filename" "$url"
-          dpkg -i "$filename"
+          sudo dpkg -i "$filename"
       - name: Echo the greeting's time
-        run: echo 'The time was ${{ steps.hello.outputs.time }}.'
+        run: pwd
+      - name: Build PDF files
+        run: |
+          for mdfile in *md
+          do
+            pandoc "$mdfile" -o "$mdfile.pdf"
+          done
