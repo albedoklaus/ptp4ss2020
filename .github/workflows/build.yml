@@ -37,5 +37,6 @@ jobs:
       - name: Create release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REF: ${{ github.ref }}
         run: |
-          hub release create --copy -a build/ue1.pdf -m "" latest
+          hub release create --copy -a build/ue1.pdf -m "$GITHUB_REF" latest
