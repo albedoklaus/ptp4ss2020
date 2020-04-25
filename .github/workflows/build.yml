@@ -14,10 +14,14 @@ jobs:
           wget -O "$filename" "$url"
           sudo dpkg -i "$filename"
       - name: Echo the greeting's time
-        run: pwd
+        run: pwd && ls
       - name: Build PDF files
         run: |
-          for mdfile in *md
+          for mdfile in *.md
           do
             pandoc "$mdfile" -o "$mdfile.pdf"
           done
+      - uses: actions/upload-artifact@v1
+        with:
+          name: my-artifact
+          path: .
