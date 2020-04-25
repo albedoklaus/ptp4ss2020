@@ -1,10 +1,9 @@
-name: Greet Everyone
-# This workflow is triggered on pushes to the repository.
+name: Build PDF files (workflow)
 on: [push]
 
 jobs:
   build:
-    name: Greeting
+    name: Build PDF files (job)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -32,4 +31,4 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: my-artifact
-          path: .
+          path: "*.pdf"
