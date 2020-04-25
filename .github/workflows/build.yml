@@ -8,7 +8,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Install pandoc
+      - name: Install TeX Live and pandoc
         run: |
           temp="$(mktemp -d)"
           url=http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
@@ -17,18 +17,20 @@ jobs:
           printf '%s\n' "selected_scheme $scheme" "instopt_adjustpath 1" | tee -a "$temp/texlive.profile"
           (cd "$temp" && sudo ./install-tl -profile texlive.profile)
           sudo tlmgr install xcolor
-          url="$(wget -qO - https://api.github.com/repos/jgm/pandoc/releases/latest | tr '"' '\n' | grep '.*/download/.*-amd64.deb')"
+          url=https://api.github.com/repos/jgm/pandoc/releases/latest
+          url="$(wget -qO - "$url" | tr '"' '\n' | grep '.*/download/.*-amd64.deb')"
           filename="$temp/pandoc-latest-amd64.deb"
           wget -O "$filename" "$url"
           sudo dpkg -i "$filename"
       - name: Build PDF files
         run: |
+          mkdir build
           for mdfile in *.md
           do
-            pandoc "$mdfile" -o "$(basename "$mdfile" .md).pdf"
+            pandoc "$mdfile" -o "build/$(basename "$mdfile" .md).pdf"
           done
       - name: Upload artifacts
         uses: actions/upload-artifact@v1
         with:
-          name: my-artifact
-          path: ue1.pdf
+          name: PDF files.zip
+          path: build
