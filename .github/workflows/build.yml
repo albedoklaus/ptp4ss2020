@@ -20,18 +20,24 @@ jobs:
           sudo tlmgr install collection-latexrecommended collection-fontsrecommended
           sudo tlmgr install babel babel-english babel-german hyphen-german
           sudo tlmgr install latexmk biber texliveonfly
-          url=https://api.github.com/repos/jgm/pandoc/releases/latest
-          url="$(wget -qO - "$url" | tr '"' '\n' | grep '.*/download/.*-amd64.deb')"
-          filename="$temp/pandoc-latest-amd64.deb"
-          wget -O "$filename" "$url"
-          sudo dpkg -i "$filename"
+          #url=https://api.github.com/repos/jgm/pandoc/releases/latest
+          #url="$(wget -qO - "$url" | tr '"' '\n' | grep '.*/download/.*-amd64.deb')"
+          #filename="$temp/pandoc-latest-amd64.deb"
+          #wget -O "$filename" "$url"
+          #sudo dpkg -i "$filename"
       - name: Build PDF files
         run: |
-          mkdir build
-          for mdfile in *.md
+          for texfile in *.tex
           do
-            pandoc "$mdfile" -o "build/$(basename "$mdfile" .md).pdf"
+            latexmk -pdf *.tex
           done
+          mkdir -p build
+          mv *.pdf build
+          #mkdir build
+          #for mdfile in *.md
+          #do
+          #  pandoc "$mdfile" -o "build/$(basename "$mdfile" .md).pdf"
+          #done
       - name: Upload artifacts
         uses: actions/upload-artifact@v1
         with:
@@ -44,4 +50,5 @@ jobs:
           hub release delete latest || true
           git tag -d latest || true
           git push -d "https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}" latest || true
-          hub release create --copy -a "build/ue1.pdf" -a "build/README.pdf" -m "Latest release" -m "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" latest
+          #hub release create --copy -a "build/ue1.pdf" -a "build/README.pdf" -m "Latest release" -m "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" latest
+          hub release create --copy -a "build/Zettel1.pdf" -m "Latest release" -m "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" latest
