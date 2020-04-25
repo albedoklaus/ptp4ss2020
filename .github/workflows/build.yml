@@ -25,7 +25,7 @@ jobs:
         run: |
           for mdfile in *.md
           do
-            pandoc "$mdfile" -o "$mdfile.pdf"
+            pandoc "$mdfile" -o "$(basename "$mdfile" .md).pdf"
           done
       - name: Upload artifacts
         uses: actions/upload-artifact@v1
