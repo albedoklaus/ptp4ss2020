@@ -17,7 +17,7 @@ jobs:
           wget -qO - "$url" | tar --strip-components=1 -C "$temp" -xzvf -
           scheme="scheme-basic"
           printf '%s\n' "selected_scheme $scheme" "instopt_adjustpath 1" | tee -a "$temp/texlive.profile"
-          (cd "$temp" && ./install-tl -profile texlive.profile)
+          (cd "$temp" && sudo ./install-tl -profile texlive.profile)
           url="$(wget -qO - https://api.github.com/repos/jgm/pandoc/releases/latest | tr '"' '\n' | grep '.*/download/.*-amd64.deb')"
           filename="$temp/pandoc-latest-amd64.deb"
           wget -O "$filename" "$url"
@@ -28,7 +28,8 @@ jobs:
           do
             pandoc "$mdfile" -o "$mdfile.pdf"
           done
-      - uses: actions/upload-artifact@v1
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v1
         with:
           name: my-artifact
           path: .
