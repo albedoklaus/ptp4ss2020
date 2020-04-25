@@ -2,7 +2,7 @@
 \usepackage[margin=30mm,right=30mm]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
-\usepackage{amsmath}
+\usepackage{amsmath, amssymb}
 
 \newcount\colveccount
 \newcommand*\colvec[1]{
@@ -23,6 +23,7 @@
 
 \title{Übungsblatt 1 - PTP4}
 \author{}
+
 \date{}
 
 \begin{document}
@@ -141,4 +142,35 @@ Zusammen mit der Normierungsbedingung $|\alpha|^2 + |\beta|^2 + |\gamma|^2 = 1$ 
 \begin{equation}
     x^+ = \colvec{3}{\sqrt{\frac{1}{4}}}{\sqrt{\frac{2}{4}}}{\sqrt{\frac{1}{4}}}.
 \end{equation}
+
+\subsection{}
+Bei einer zufälligen Orientierung des Spins der Zinnatome werden nach einer langen Zeitdauer ($t \rightarrow \infty$) alle möglichen Superpositionen der Zustände $z^+$, $z^0$ und $z^-$ auftreten.\\
+Da diese durch den Zufall gleichverteilt sind, treten auch die genannten Grundzustände gleichmäßig auf und man erwartet bei allen drei Strahlen dieselbe Intensität.
+
+\subsection{}
+Die Argumentation aus Aufgabe 2.3 ist auch für ein Magnetfeld in x-Richtung gültig.\\
+Somit erwartet man nach dem Durchlaufen des Magnetfeldgradienten in x-Richtung $\frac{1}{3}$ aller Atome im Zustand $x^+$.\\
+Dieser Zustand, der in Aufgabe 2.2 gegeben ist, lässt sich als Linearkombination der Zustände $z^+$, $z^0$ und $z^-$ auffassen:
+\begin{equation}
+    x^+ = \colvec{3}{\sqrt{\frac{1}{4}}}{\sqrt{\frac{2}{4}}}{\sqrt{\frac{1}{4}}} = \sqrt{\frac{1}{4}}\colvec{3}{1}{0}{0} + \sqrt{\frac{2}{4}}\colvec{3}{0}{1}{0} + \sqrt{\frac{1}{4}}\colvec{3}{0}{0}{1}
+\end{equation}
+Die Vorfaktoren stellen die Amplituden der Wahrscheinlichkeitsverteilung dar, wodurch die Intensitäten den Quadraten der Vorfaktoren entsprechen: \\
+$\frac{1}{4}$ für $z^+$, $\frac{1}{2}$ für $z^0$ und $\frac{1}{4}$ für $z^-$.
+
+\subsection{}
+Für die Lösung dieser Aufgabe wird die Darstellung von $x^0$ in Ahängigkeit von $z^+$, $z^0$ und $z^-$ benötigt.\\
+Eine Änderung des Vorzeichens des magnetischen Moments, und somit den Zustand $x^-$, erhält man zum Beispiel durch Wechseln des Vorzeichen in der 2. Komponente des Zustands $x^+$.
+Da die Vektoren $x^+$, $x^0$ und $x^-$ eine Basis von $\mathbb{R}^3$ aufspannen müssen und somit jeweils senkrecht aufeinander stehen, kann $x^0=(a, b, c)^T$ berechnet werden:
+\begin{equation}
+    x^+ * x^0 = 0 \Leftrightarrow \sqrt{\frac{1}{4}}a + \sqrt{\frac{2}{4}}b + \sqrt{\frac{1}{4}}c = 0
+\end{equation}
+\begin{equation}
+    x^- * x^0 = 0 \Leftrightarrow \sqrt{\frac{1}{4}}a - \sqrt{\frac{2}{4}}b + \sqrt{\frac{1}{4}}c = 0
+\end{equation}
+Durch Addition der beiden Gleichungen folgt $a = -c$ und durch Einsetzen dieser Beziehung in die zweite Gleichung folgt, dass $b = 0$ ist.\\
+Durch die Normierungsbedingung $|a|^2 + |b|^2 + |c|^2 = 1$ folgt 
+\begin{equation}
+    x^0 = \colvec{3}{\sqrt{\frac{1}{2}}}{0}{\sqrt{\frac{1}{2}}}.
+\end{equation}
+Und daraus eine gleichmäßige Aufspaltung der Zinnatome in die $z^+$- und $z^-$-Strahlen mit je 50\%. Im Strahl $z^0$ sind keine Atome beobachtbar.
 \end{document}
