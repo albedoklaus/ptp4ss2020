@@ -13,10 +13,13 @@ jobs:
           temp="$(mktemp -d)"
           url=http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
           wget -qO - "$url" | tar --strip-components=1 -C "$temp" -xzvf -
-          scheme="scheme-basic"
+          scheme="scheme-minimal"
           printf '%s\n' "selected_scheme $scheme" "instopt_adjustpath 1" | tee -a "$temp/texlive.profile"
           (cd "$temp" && sudo ./install-tl -profile texlive.profile)
-          sudo tlmgr install xcolor
+          sudo tlmgr install latex latex-bin latex-fonts latexconfig
+          sudo tlmgr install collection-latexrecommended collection-fontsrecommended
+          sudo tlmgr install babel babel-english babel-german hyphen-german
+          sudo tlmgr install latexmk biber texliveonfly
           url=https://api.github.com/repos/jgm/pandoc/releases/latest
           url="$(wget -qO - "$url" | tr '"' '\n' | grep '.*/download/.*-amd64.deb')"
           filename="$temp/pandoc-latest-amd64.deb"
