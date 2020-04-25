@@ -7,15 +7,16 @@ jobs:
     name: Greeting
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Install pandoc
         run: |
+          sudo apt install --install-suggests pandoc
           url="$(wget -qO - https://api.github.com/repos/jgm/pandoc/releases/latest | tr '"' '\n' | grep '.*/download/.*-amd64.deb')"
           filename="pandoc-latest-amd64.deb"
           wget -O "$filename" "$url"
           sudo dpkg -i "$filename"
-      - name: Echo the greeting's time
-        run: pwd && ls
+          rm "$filename"
       - name: Build PDF files
         run: |
           for mdfile in *.md
