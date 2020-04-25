@@ -7,9 +7,11 @@ jobs:
     name: Greeting
     runs-on: ubuntu-latest
     steps:
-      - name: Hello world
+      - name: Install pandoc
         run: |
-          echo 1
-          echo 2
+          url="$(wget -qO - https://api.github.com/repos/jgm/pandoc/releases/latest | tr '"' '\n' | grep '.*/download/.*-amd64.deb')"
+          filename="pandoc-latest-amd64.deb"
+          wget -O "$filename" "$url"
+          dpkg -i "$filename"
       - name: Echo the greeting's time
         run: echo 'The time was ${{ steps.hello.outputs.time }}.'
