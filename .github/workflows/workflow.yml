@@ -3,7 +3,10 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: debian:buster
+    container:
+      image: debian:buster
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     #container: ubuntu:latest
     steps:
       - name: Install dependencies
@@ -13,8 +16,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Create release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        #env:
+        #  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           printf 'Token: %s\n' "$GITHUB_TOKEN"
           printf 'noToken: %s\n' "$NOGITHUB_TOKEN"
