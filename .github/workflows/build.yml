@@ -3,12 +3,12 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: debian:buster
+    #container: debian:buster
     steps:
       - name: Install dependencies
         run: |
-          apt update
-          apt install -y git hub perl python wget
+          #apt update
+          #apt install -y git hub perl python wget
       - name: Checkout
         uses: actions/checkout@v2
       - name: Create release
