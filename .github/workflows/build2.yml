@@ -7,10 +7,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Install TeX Live and pandoc
+      - name: Install dependencies
         run: |
           apt update
           apt install -y perl python wget
+          apt install -y git hub
+      - name: Install TeX Live and pandoc
+        run: |
           temp="$(mktemp -d)"
           url=http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
           wget -qO - "$url" | tar --strip-components=1 -C "$temp" -xzvf -
@@ -29,7 +32,7 @@ jobs:
       - name: Build PDF files
         run: |
           #find / -name latexmk
-          PATH="${PATH}:$(cd /usr/local/texlive/*/bin/* && pwd)"
+          #PATH="${PATH}:$(cd /usr/local/texlive/*/bin/* && pwd)"
           texliveonfly --help
           for texfile in *.tex
           do
