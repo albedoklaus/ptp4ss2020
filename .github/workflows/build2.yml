@@ -29,7 +29,7 @@ jobs:
       - name: Build PDF files
         run: |
           #find / -name latexmk
-          #PATH="${PATH}:$(cd /usr/local/texlive/*/bin/* && pwd)"
+          PATH="${PATH}:$(cd /usr/local/texlive/*/bin/* && pwd)"
           texliveonfly --help
           for texfile in *.tex
           do
