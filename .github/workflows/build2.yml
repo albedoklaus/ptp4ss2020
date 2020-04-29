@@ -10,6 +10,7 @@ jobs:
       - name: Install dependencies
         run: |
           ls -ahl
+          git log
           exit 1
           apt update
           apt install -y perl python wget
