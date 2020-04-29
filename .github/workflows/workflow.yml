@@ -5,8 +5,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: debian:buster
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #  env:
+    #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     #container: ubuntu:latest
     steps:
       - name: Install dependencies
@@ -14,31 +14,31 @@ jobs:
           apt update
           apt install -y git hub perl python wget
       - name: Checkout
-        uses: actions/checkout@v1
-      - name: Create release
-        #env:
-        #  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          printf 'Token: %s\n' "$GITHUB_TOKEN"
-          printf 'noToken: %s\n' "$NOGITHUB_TOKEN"
-          export GITHUB_TOKEN
-          echo 0
-          git config -l
-          hub release delete latest || true
-          echo 1
-          git tag -d latest || true
-          echo 2
-          #git push -d "https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}" latest || true
-          git push -d "https://github.com/${GITHUB_REPOSITORY}" latest || true
-          echo 3
-          #hub release create -a "build/ue1.pdf" -a "build/README.pdf" -m "Latest release" -m "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" latest
-          #hub release create -a "build/Zettel1.pdf" -m "Latest release" -m "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" latest
-          hub release create -m "Latest release" -m "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" latest
-          for pdffile in build/*.pdf
-          do
-            hub release edit -m "" -a "$pdffile" latest
-          done
-          exit 1
+        uses: actions/checkout@v2
+      #- name: Create release
+      #  #env:
+      #  #  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #  run: |
+      #    printf 'Token: %s\n' "$GITHUB_TOKEN"
+      #    printf 'noToken: %s\n' "$NOGITHUB_TOKEN"
+      #    export GITHUB_TOKEN
+      #    echo 0
+      #    git config -l
+      #    hub release delete latest || true
+      #    echo 1
+      #    git tag -d latest || true
+      #    echo 2
+      #    #git push -d "https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}" latest || true
+      #    git push -d "https://github.com/${GITHUB_REPOSITORY}" latest || true
+      #    echo 3
+      #    #hub release create -a "build/ue1.pdf" -a "build/README.pdf" -m "Latest release" -m "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" latest
+      #    #hub release create -a "build/Zettel1.pdf" -m "Latest release" -m "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" latest
+      #    hub release create -m "Latest release" -m "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" latest
+      #    for pdffile in build/*.pdf
+      #    do
+      #      hub release edit -m "" -a "$pdffile" latest
+      #    done
+      #    exit 1
       - name: Install TeX Live
         run: |
           temp="$(mktemp -d)"
@@ -82,22 +82,31 @@ jobs:
       #  with:
       #    name: PDF files
       #    path: build
+      #- name: Create release
+      #  env:
+      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #  run: |
+      #    export GITHUB_TOKEN
+      #    echo 0
+      #    hub release delete latest || true
+      #    echo 1
+      #    git tag -d latest || true
+      #    echo 2
+      #    git push -d "https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}" latest || true
+      #    echo 3
+      #    #hub release create -a "build/ue1.pdf" -a "build/README.pdf" -m "Latest release" -m "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" latest
+      #    #hub release create -a "build/Zettel1.pdf" -m "Latest release" -m "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" latest
+      #    hub release create -m "Latest release" -m "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" --draft latest
+      #    for pdffile in build/*.pdf
+      #    do
+      #      hub release edit -m "" -a "$pdffile" latest
+      #    done
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
       - name: Create release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          export GITHUB_TOKEN
-          echo 0
-          hub release delete latest || true
-          echo 1
-          git tag -d latest || true
-          echo 2
-          git push -d "https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}" latest || true
-          echo 3
-          #hub release create -a "build/ue1.pdf" -a "build/README.pdf" -m "Latest release" -m "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" latest
-          #hub release create -a "build/Zettel1.pdf" -m "Latest release" -m "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" latest
-          hub release create -m "Latest release" -m "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" --draft latest
-          for pdffile in build/*.pdf
-          do
-            hub release edit -m "" -a "$pdffile" latest
-          done
+          pwd
+          ls -ahl
+          ls -ahl build
+          apt install -y git hub perl python wget
