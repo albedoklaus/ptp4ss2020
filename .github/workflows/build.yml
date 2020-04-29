@@ -3,53 +3,57 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    container: debian:buster
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
-      - name: Install TeX Live and pandoc
+        uses: actions/checkout@v1
+      - name: Install dependencies
         run: |
-          pwd
-          ls -ahl
-          exit 1
+          apt update
+          apt install -y git hub perl python wget
+      - name: Install TeX Live
+        run: |
           temp="$(mktemp -d)"
           url=http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
           wget -qO - "$url" | tar --strip-components=1 -C "$temp" -xzvf -
           scheme="scheme-minimal"
           printf '%s\n' "selected_scheme $scheme" "instopt_adjustpath 1" | tee -a "$temp/texlive.profile"
-          (cd "$temp" && sudo ./install-tl -profile texlive.profile)
-          sudo tlmgr install latex latex-bin latex-fonts latexconfig
-          sudo tlmgr install collection-latexrecommended collection-fontsrecommended
-          sudo tlmgr install babel babel-english babel-german hyphen-german
-          sudo tlmgr install latexmk biber texliveonfly
-          #url=https://api.github.com/repos/jgm/pandoc/releases/latest
-          #url="$(wget -qO - "$url" | tr '"' '\n' | grep '.*/download/.*-amd64.deb')"
-          #filename="$temp/pandoc-latest-amd64.deb"
-          #wget -O "$filename" "$url"
-          #sudo dpkg -i "$filename"
+          (cd "$temp" && ./install-tl -profile texlive.profile)
+          tlmgr install latex latex-bin latex-fonts latexconfig
+          tlmgr install collection-latexrecommended collection-fontsrecommended
+          tlmgr install babel babel-english babel-german hyphen-german
+          tlmgr install latexmk biber texliveonfly
+      - name: Install pandoc
+        run: |
+          temp="$(mktemp -d)"
+          url=https://api.github.com/repos/jgm/pandoc/releases/latest
+          url="$(wget -qO - "$url" | tr '"' '\n' | grep '.*/download/.*-amd64.deb')"
+          filename="$temp/pandoc-latest-amd64.deb"
+          wget -O "$filename" "$url"
+          dpkg -i "$filename"
       - name: Build PDF files
         run: |
-          #find / -name latexmk
           PATH="${PATH}:$(cd /usr/local/texlive/*/bin/* && pwd)"
-          texliveonfly --help
+          for mdfile in *.md
+          do
+            printf '%s\n' "Run pandoc for $mdfile"
+            pandoc "$mdfile" -o "build/$(basename "$mdfile" .md).pdf"
+          done
           for texfile in *.tex
           do
             printf '%s\n' "Run texliveonfly for $texfile"
-            sudo texliveonfly --compiler=pdflatex --arguments="-draftmode -interaction=nonstopmode" "$texfile"
+            texliveonfly --compiler=pdflatex --arguments="-draftmode -interaction=nonstopmode" "$texfile"
           done
           printf '%s\n' "Run latexmk *.pdf"
-          latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode -halt-on-error" Zettel1.tex
+          latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode -halt-on-error" *.tex
+          rm -rf build
           mkdir -p build
           mv *.pdf build
-          #mkdir build
-          #for mdfile in *.md
-          #do
-          #  pandoc "$mdfile" -o "build/$(basename "$mdfile" .md).pdf"
-          #done
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v1
-        with:
-          name: PDF files
-          path: build
+      #- name: Upload artifacts
+      #  uses: actions/upload-artifact@v1
+      #  with:
+      #    name: PDF files
+      #    path: build
       - name: Create release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
