@@ -2,7 +2,8 @@
 \usepackage[margin=30mm,right=30mm]{geometry}
 \usepackage[utf8]{inputenc}
 \usepackage[ngerman]{babel}
-\usepackage{amsmath}
+\usepackage{amsmath, amssymb}
+\usepackage{braket}
 
 \newcount\colveccount
 \newcommand*\colvec[1]{
@@ -29,6 +30,59 @@
 
 \maketitle
 
-\section{Test}
+\section{Eigenschaften der Wellenfunktion}
+
+\subsection{}
+\begin{equation}
+        \Braket{\phi | \psi} = \int_{\mathbb{R}^d}\phi(t,\vec{r})^*\psi(t,\vec{r})\text{d}^d\vec{r} =
+\end{equation}
+\begin{equation}
+        =  \int_{\mathbb{R}^d}((\phi(t,\vec{r})^*(\psi(t,\vec{r}))^*)^*\text{d}^d\vec{r} =
+\end{equation}
+\begin{equation}
+        =  \int_{\mathbb{R}^d}(\phi(t,\vec{r}\psi(t,\vec{r})^*)^*\text{d}^d\vec{r} = 
+\end{equation}
+\begin{equation}
+        = (\int_{\mathbb{R}^d}\phi(t,\vec{r}\psi(t,\vec{r})^*\text{d}^d\vec{r})^* = \Braket{\psi|\phi}^*
+\end{equation}
+
+\subsection{}
+\begin{equation}
+        \Braket{\psi|\alpha\phi + \beta\varphi} = \int_{\mathbb{R}^d}\psi(t,\vec{r})^*(\alpha\phi(t,\vec{r}) + \beta\varphi(t,\vec{r}))\text{d}^d\vec{r} =
+\end{equation}
+\begin{equation}
+        = \int_{\mathbb{R}^d}\psi(t,\vec{r})^*\alpha\phi(t,\vec{r})\text{d}^d\vec{r} + \int_{\mathbb{R}^d}\psi(t,\vec{r})^*\beta\varphi(t,\vec{r})\text{d}^d\vec{r} =
+\end{equation}
+\begin{equation}
+        = \alpha\int_{\mathbb{R}^d}\psi(t,\vec{r})^*\phi(t,\vec{r})\text{d}^d\vec{r} + \beta\int_{\mathbb{R}^d}\psi(t,\vec{r})^*\varphi(t,\vec{r})\text{d}^d\vec{r} =
+\end{equation}
+\begin{equation}
+        = \alpha\Braket{\psi|\phi} + \beta\Braket{\psi|\varphi}
+\end{equation}
+
+\subsection{}
+Folgt durch Anwendung von 1.1, 1.2 und erneut 1.1.
+
+\subsection{}
+\begin{equation}
+        \Braket{\psi|\psi} = \int_{\mathbb{R}^d}\psi(t,\vec{r})^*\psi(t,\vec{r})\text{d}^d\vec{r} =
+\end{equation}
+\begin{equation}
+        = \int_{\mathbb{R}^d}|\psi(t,\vec{r})|^2\text{d}^d\vec{r}
+\end{equation}
+\begin{equation}
+        |\psi|\geq 0 \Rightarrow \int_{\mathbb{R}^d}|\psi(t,\vec{r})|^2\text{d}^d\vec{r} \geq 0 \, \forall\psi
+\end{equation}
+\begin{equation}
+        |\psi| = 0 \Leftrightarrow \int_{\mathbb{R}^d}|\psi(t,\vec{r})|^2\text{d}^d\vec{r} = 0
+\end{equation}
+\begin{equation}
+        \Rightarrow \int_{\mathbb{R}^d}|\psi(t,\vec{r})|^2\text{d}^d\vec{r} > 0 \, \forall\psi \neq 0
+\end{equation}
+\section{Erwartungswerte der Energie und des Impulses}
+
+\section{Fouriertransformation}
+
+\section{Dirac-Delta-Funktion (-Distribution)}
 
 \end{document}
