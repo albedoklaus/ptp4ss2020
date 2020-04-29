@@ -37,7 +37,7 @@ jobs:
           for mdfile in *.md
           do
             printf '%s\n' "Run pandoc for $mdfile"
-            pandoc "$mdfile" -o "build/$(basename "$mdfile" .md).pdf"
+            pandoc "$mdfile" -o "$(basename "$mdfile" .md).tex"
           done
           for texfile in *.tex
           do
