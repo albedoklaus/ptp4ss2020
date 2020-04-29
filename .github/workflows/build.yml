@@ -8,8 +8,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Install TeX Live and pandoc
         run: |
+          pwd
           ls -ahl
-          git log
           exit 1
           temp="$(mktemp -d)"
           url=http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
