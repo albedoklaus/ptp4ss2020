@@ -31,7 +31,7 @@ jobs:
           for texfile in *.tex
           do
             printf '%s\n' "Run texliveonfly for $texfile"
-            texliveonfly --compiler=pdflatex --arguments="-draftmode -interaction=nonstopmode" "$texfile"
+            sudo texliveonfly --compiler=pdflatex --arguments="-draftmode -interaction=nonstopmode" "$texfile"
           done
           printf '%s\n' "Run latexmk *.pdf"
           latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode -halt-on-error" Zettel1.tex
