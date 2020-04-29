@@ -9,6 +9,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Install dependencies
         run: |
+          ls -ahl
+          exit 1
           apt update
           apt install -y perl python wget
           apt install -y git hub
