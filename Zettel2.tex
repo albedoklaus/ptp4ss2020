@@ -80,6 +80,34 @@ Folgt durch Anwendung von 1.1, 1.2 und erneut 1.1.
         \Rightarrow \int_{\mathbb{R}^d}|\psi(t,\vec{r})|^2\text{d}^d\vec{r} > 0 \, \forall\psi \neq 0
 \end{equation}
 \section{Erwartungswerte der Energie und des Impulses}
+\begin{equation}
+        \Braket{\psi|\psi} = \int_{-L/2}^{L/2} \dotso \int_{-L/2}^{L/2} \psi(t,\vec{r})^*\psi(t,\vec{r}) \text{d}r_1 \dotso \text{d}r_d = 
+\end{equation}
+\begin{equation}
+        = \int_{-L/2}^{L/2} \dotso \int_{-L/2}^{L/2} \exp(\frac{i}{\hbar}\vec{p}\cdot\vec{r} - \frac{i}{\hbar}Et)^*\exp(\frac{i}{\hbar}\vec{p}\cdot\vec{r} - \frac{i}{\hbar}Et) \text{d}r_1 \dotso \text{d}r_d
+\end{equation}
+\begin{equation}
+        \label{bla}
+        \nabla_{\vec{r}}\psi = \nabla_{\vec{r}} \exp(\frac{i}{\hbar}\vec{p}\cdot\vec{r} - \frac{i}{\hbar}Et) = \vec{p} \exp(\frac{i}{\hbar}\vec{p}\cdot\vec{r} - \frac{i}{\hbar}Et) = \vec{p}\psi
+\end{equation}
+
+\subsection{}
+\begin{equation}
+        \frac{\Braket{\psi|H|\psi}}{\Braket{\psi|\psi}} = \frac{\Braket{\psi|\frac{\vec{P}^2}{2m} + V_0|\psi}}{\Braket{\psi|\psi}} = \frac{\Braket{\psi|\frac{\vec{P}^2}{2m}|\psi}}{\Braket{\psi|\psi}} + \frac{\Braket{\psi|V_0|\psi}}{\Braket{\psi|\psi}} \overset{2.3}{=}
+\end{equation}
+\begin{equation}
+        = \frac{\Braket{\psi|\frac{\hbar^2\nabla^2_{\vec{r}}}{i^22m}|\psi}}{\Braket{\psi|\psi}} + V_0 \overset{(\ref{bla})}{=} \frac{\Braket{\psi|\frac{\hbar^2\frac{i^2p^2}{\hbar^2}}{i^22m}|\psi}}{\Braket{\psi|\psi}} = \frac{p^2}{2m}\frac{\Braket{\psi|\psi}}{\Braket{\psi|\psi}} = \frac{p^2}{2m}
+\end{equation}
+
+\subsection{}
+\begin{equation}
+        \frac{\Braket{\psi|\vec{P}|\psi}}{\Braket{\psi|\psi}} = \frac{\Braket{\psi|\frac{\hbar}{i}\nabla_{\vec{r}}|\psi}}{\Braket{\psi|\psi}} \overset{(\ref{bla})}{=} \frac{\Braket{\psi|\frac{\hbar}{i}\frac{i}{\hbar}\vec{p}|\psi}}{\Braket{\psi|\psi}} = \vec{p}\frac{\Braket{\psi|\psi}}{\Braket{\psi|\psi}} = \vec{p}
+\end{equation}
+
+\subsection{}
+\begin{equation}
+        \frac{\Braket{\psi|H - \frac{\vec{P}^2}{2m}|\psi}}{\Braket{\psi|\psi}} = \frac{\Braket{\psi|V_0|\psi}}{\Braket{\psi|\psi}} = V_0\frac{\Braket{\psi|\psi}}{\Braket{\psi|\psi}} = V_0
+\end{equation}
 
 \section{Fouriertransformation}
 
