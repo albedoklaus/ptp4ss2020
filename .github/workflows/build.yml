@@ -10,6 +10,7 @@ jobs:
       - name: Install TeX Live and pandoc
         run: |
           ls -ahl
+          git log
           exit 1
           temp="$(mktemp -d)"
           url=http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
