@@ -3,8 +3,8 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    #container: debian:buster
-    container: ubuntu:latest
+    container: debian:buster
+    #container: ubuntu:latest
     steps:
       - name: Install dependencies
         run: |
