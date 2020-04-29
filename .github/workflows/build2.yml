@@ -10,7 +10,7 @@ jobs:
       - name: Install TeX Live and pandoc
         run: |
           apt update
-          apt install -y wget
+          apt install -y perl wget
           temp="$(mktemp -d)"
           url=http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
           wget -qO - "$url" | tar --strip-components=1 -C "$temp" -xzvf -
