@@ -3,6 +3,7 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+    container: debian:buster
     steps:
       - name: Checkout
         uses: actions/checkout@v2
