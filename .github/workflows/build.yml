@@ -16,8 +16,10 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           printf 'Token: %s\n' "$GITHUB_TOKEN"
+          printf 'noToken: %s\n' "$NOGITHUB_TOKEN"
           export GITHUB_TOKEN
           echo 0
+          git config -l
           hub release delete latest || true
           echo 1
           git tag -d latest || true
