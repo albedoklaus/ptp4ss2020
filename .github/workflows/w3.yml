@@ -48,7 +48,7 @@ jobs:
           printf '%s\n' "selected_scheme $scheme" "instopt_adjustpath 1" | tee -a "$temp/texlive.profile"
           (cd "$temp" && ./install-tl -profile texlive.profile)
           tlmgr install latex latex-bin latex-fonts latexconfig
-          tlmgr install collection-latexrecommended collection-fontsrecommended
+          #tlmgr install collection-latexrecommended collection-fontsrecommended
           tlmgr install babel babel-english babel-german hyphen-german
           tlmgr install latexmk biber texliveonfly
       - name: Install pandoc
