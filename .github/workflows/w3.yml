@@ -80,8 +80,8 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v1
         with:
-          name: PDF files
-          path: build/*
+          name: pdffiles
+          path: build
       #- name: Create release
       #  env:
       #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -103,10 +103,14 @@ jobs:
       #    done
   deploy:
     runs-on: ubuntu-latest
+    needs: build
     steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v1
+        with:
+          name: pdffiles
       - name: Create release
         run: |
           pwd
           ls -ahl
           ls -ahl build
-          apt install -y git hub perl python wget
