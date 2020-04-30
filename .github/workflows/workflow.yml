@@ -83,3 +83,4 @@ jobs:
           do
             hub release edit -m "" -a "$pdffile" latest
           done
+
