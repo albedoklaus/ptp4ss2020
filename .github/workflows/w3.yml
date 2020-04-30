@@ -15,30 +15,6 @@ jobs:
           apt install -y git hub perl python wget
       - name: Checkout
         uses: actions/checkout@v2
-      #- name: Create release
-      #  #env:
-      #  #  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #  run: |
-      #    printf 'Token: %s\n' "$GITHUB_TOKEN"
-      #    printf 'noToken: %s\n' "$NOGITHUB_TOKEN"
-      #    export GITHUB_TOKEN
-      #    echo 0
-      #    git config -l
-      #    hub release delete latest || true
-      #    echo 1
-      #    git tag -d latest || true
-      #    echo 2
-      #    #git push -d "https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}" latest || true
-      #    git push -d "https://github.com/${GITHUB_REPOSITORY}" latest || true
-      #    echo 3
-      #    #hub release create -a "build/ue1.pdf" -a "build/README.pdf" -m "Latest release" -m "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" latest
-      #    #hub release create -a "build/Zettel1.pdf" -m "Latest release" -m "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" latest
-      #    hub release create -m "Latest release" -m "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" latest
-      #    for pdffile in build/*.pdf
-      #    do
-      #      hub release edit -m "" -a "$pdffile" latest
-      #    done
-      #    exit 1
       - name: Install TeX Live
         run: |
           temp="$(mktemp -d)"
@@ -59,7 +35,7 @@ jobs:
           filename="$temp/pandoc-latest-amd64.deb"
           wget -O "$filename" "$url"
           dpkg -i "$filename"
-      - name: Build PDF files
+      - name: Convert Markdown to TeX with pandoc
         run: |
           PATH="${PATH}:$(cd /usr/local/texlive/*/bin/* && pwd)"
           for mdfile in *.md
@@ -67,11 +43,17 @@ jobs:
             printf '%s\n' "Run pandoc for $mdfile"
             pandoc "$mdfile" --standalone -o "$(basename "$mdfile" .md).tex"
           done
+      - name: Install required packages with texliveonfly
+        run: |
+          PATH="${PATH}:$(cd /usr/local/texlive/*/bin/* && pwd)"
           for texfile in *.tex
           do
             printf '%s\n' "Run texliveonfly for $texfile"
             texliveonfly --compiler=pdflatex --arguments="-draftmode -interaction=nonstopmode" "$texfile"
           done
+      - name: Build PDF files with latexmk
+        run: |
+          PATH="${PATH}:$(cd /usr/local/texlive/*/bin/* && pwd)"
           printf '%s\n' "Run latexmk *.pdf"
           latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode -halt-on-error" *.tex
           rm -rf build
