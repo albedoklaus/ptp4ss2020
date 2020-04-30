@@ -64,25 +64,6 @@ jobs:
         with:
           name: build
           path: build
-      #- name: Create release
-      #  env:
-      #    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #  run: |
-      #    export GITHUB_TOKEN
-      #    echo 0
-      #    hub release delete latest || true
-      #    echo 1
-      #    git tag -d latest || true
-      #    echo 2
-      #    git push -d "https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}" latest || true
-      #    echo 3
-      #    #hub release create -a "build/ue1.pdf" -a "build/README.pdf" -m "Latest release" -m "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" latest
-      #    #hub release create -a "build/Zettel1.pdf" -m "Latest release" -m "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" latest
-      #    hub release create -m "Latest release" -m "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" --draft latest
-      #    for pdffile in build/*.pdf
-      #    do
-      #      hub release edit -m "" -a "$pdffile" latest
-      #    done
   deploy:
     runs-on: ubuntu-latest
     needs: build
@@ -94,7 +75,14 @@ jobs:
         with:
           name: build
       - name: Create release
+        #env:
+        #  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          pwd
-          ls -ahl
-          ls -ahl build
+          hub release delete latest || true
+          git tag -d latest || true
+          git push -d "https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}" latest || true
+          hub release create -m "Latest release" -m "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" latest
+          for pdffile in build/*.pdf
+          do
+            hub release edit -m "" -a "$pdffile" latest
+          done
