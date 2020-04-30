@@ -75,15 +75,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo 1
           hub release delete latest || true
-          echo 2
           git tag -d latest || true
-          echo 3
           git push -d "https://${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}" latest || true
           hub release create -m "Latest release" -m "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" latest
           for pdffile in build/*.pdf
           do
             hub release edit -m "" -a "$pdffile" latest
           done
-
