@@ -159,6 +159,27 @@ dann folgt für die Fourier-Transformierte von $h$:
                &= a\hat{f}(k) + b\hat{g}(k)
 \end{split}
 \end{align}
+
+\subsubsection{}
+
+Sei
+\begin{align}
+    g(x) &= f(x-a)
+\end{align}
+dann folgt für die Fourier-Transformierte von $g$:
+\begin{align}
+\begin{split}
+    \hat{g}(k) &= \left(\frac{1}{2\pi} \right)^{\frac{d}{2}} \int_{\mathbb{R}^d} g(x) \exp(-ikx) \text{d}x \\
+               &= \left(\frac{1}{2\pi} \right)^{\frac{d}{2}} \int_{\mathbb{R}^d} f(x-a) \exp(-ikx) \text{d}x \\
+               &\overset{\text{Subst.} y=x-a}{=} \left(\frac{1}{2\pi} \right)^{\frac{d}{2}} \int_{\mathbb{R}^d} f(y) \exp(-ik(y+a)) \text{d}y \\
+               &= \left(\frac{1}{2\pi} \right)^{\frac{d}{2}} \int_{\mathbb{R}^d} f(y) \exp(-iky) \exp(-ika) \text{d}y \\
+               &= \exp(-ika) \left(\frac{1}{2\pi} \right)^{\frac{d}{2}} \int_{\mathbb{R}^d} f(y) \exp(-iky) \text{d}y \\
+               &\overset{\text{Subst.} x=y}{=} \exp(-ika) \left(\frac{1}{2\pi} \right)^{\frac{d}{2}} \int_{\mathbb{R}^d} f(x) \exp(-ikx) \text{d}x \\
+               &= \exp(-ika) \hat{f}(k)
+\end{split}
+\end{align}
+
+
 \section{Dirac-Delta-Funktion (-Distribution)}
 
 \subsection{}
