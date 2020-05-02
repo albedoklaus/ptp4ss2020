@@ -126,7 +126,13 @@ Das Ergebnis folgt mit den Gaußschen Fehlerintegral:
 \section{Dirac-Delta-Funktion (-Distribution)}
 
 \subsection{}
-
+\begin{equation}
+        \int_{-\infty}^\infty \delta(x) \text{d}x = \int_{-\infty}^\infty \lim_{\sigma \to 0}\frac{1}{\sqrt{2\pi\sigma^2}}\exp(\frac{-x^2}{2\sigma^2})\text{d}x = \lim_{\sigma \to 0}\frac{1}{\sqrt{2\pi\sigma^2}} \int_{-\infty}^\infty \exp(\frac{-x^2}{2\sigma^2})\text{d}x
+\end{equation}
+Mit dem Gaußschen Fehlerintegral folgt:
+\begin{equation}
+        \int_{-\infty}^\infty \delta(x) \text{d}x = \lim_{\sigma \to 0}\frac{1}{\sqrt{2\pi\sigma^2}} \frac{\sqrt{\pi}}{\sqrt{\frac{1}{2\sigma^2}}} = 1
+\end{equation}
 \subsection{}
 \begin{equation}
         \int_{-\infty}^\infty \delta(x) \psi(x)\text{d}x = \int_{-\infty}^\infty \sum_{n=0}^\infty \frac{\psi(0)^{(n)}}{n!} x^n \delta(x)\text{d}x = \int_{-\infty}^\infty \sum_{n=0}^\infty \frac{\psi(0)^{(n)}}{n!} x^n \lim_{\sigma \to 0}\frac{1}{\sqrt{2\pi\sigma^2}}\text{d}x
