@@ -35,10 +35,15 @@ jobs:
       - name: Convert Markdown to TeX with pandoc
         run: |
           PATH="${PATH}:$(cd /usr/local/texlive/*/bin/* && pwd)"
+          for metadata in metadata.yml metadata.yaml /dev/null
+          do
+            [ -f "$metadata" ] && break
+          done
+          printf '%s\n' "Reading metadata from $metadata"
           for mdfile in *.md
           do
             printf '%s\n' "Run pandoc for $mdfile"
-            pandoc "$mdfile" --standalone -o "$(basename "$mdfile" .md).tex"
+            pandoc "$mdfile" --metadata-file="$metadata" --standalone -o "$(basename "$mdfile" .md).tex"
           done
       - name: Install required packages with texliveonfly
         run: |
