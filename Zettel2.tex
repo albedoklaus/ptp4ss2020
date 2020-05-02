@@ -120,7 +120,7 @@ Mit dem Hinweis und den Identifikationen $\alpha = \frac{1}{2\sigma^2}$ und $\be
 \begin{equation}
         \hat{f}(k) = \frac{1}{\sqrt{2\pi\sigma^2}}\int_{-\infty + 4k^2\sigma^2}^{\infty + 4k^2\sigma^2} \exp(-\frac{y^2}{2\sigma^2} - 4k^2\sigma^2)\text{d}y = \frac{1}{\sqrt{2\pi\sigma^2}}\exp(-4k^2\sigma^2)\int_{-\infty}^{\infty} \exp(-\frac{y^2}{2\sigma^2})\text{d}y
 \end{equation}
-Das Ergebnis folgt mit den Gaußschen Fehlerintegral:
+Das Ergebnis folgt mit dem Gaußschen Fehlerintegral und $\int_{-\infty}^{\infty} \text{e}^{-a(x+b)^2}\,\text{d}x= \sqrt{\frac{\pi}{a}}$:
 \begin{equation}
         \hat{f}(k) = \frac{1}{\sqrt{2\pi\sigma^2}}\exp(-4k^2\sigma^2) \frac{\sqrt{\pi}}{\sqrt{\frac{1}{2\sigma^2}}} = \exp(-4\sigma^2k^2)
 \end{equation}
