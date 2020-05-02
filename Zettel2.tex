@@ -125,4 +125,23 @@ Das Ergebnis folgt mit den Gaußschen Fehlerintegral:
 \end{equation}
 \section{Dirac-Delta-Funktion (-Distribution)}
 
+\subsection{}
+
+\subsection{}
+\begin{equation}
+        \int_{-\infty}^\infty \delta(x) \psi(x)\text{d}x = \int_{-\infty}^\infty \sum_{n=0}^\infty \frac{\psi(0)^{(n)}}{n!} x^n \delta(x)\text{d}x = \int_{-\infty}^\infty \sum_{n=0}^\infty \frac{\psi(0)^{(n)}}{n!} x^n \lim_{\sigma \to 0}\frac{1}{\sqrt{2\pi\sigma^2}}\text{d}x
+\end{equation}
+\begin{equation}
+        \sum_{n=0}^\infty \frac{\psi(0)^{(n)}}{n!} \lim_{\sigma \to 0} \int_{-\infty}^\infty \frac{1}{\sqrt{2\pi\sigma^2}} x^n \text{d}x \overset{Hinweis}{=} \sum_{n=0}^\infty \frac{\psi(0)^{(n)}}{n!} \lim_{\sigma \to 0} \frac{2^n\sigma^n\Gamma(\frac{1}{2} + n)}{\sqrt{\pi}} = 
+\end{equation}
+\begin{equation}
+        = \psi(0) \frac{\Gamma(\frac{1}{2})}{\sqrt{\pi}} + \sum_{n=1}^\infty \frac{\psi(0)^{(n)}}{n!} \lim_{\sigma \to 0} \frac{2^n\sigma^n\Gamma(\frac{1}{2} + n)}{\sqrt{\pi}} = \psi(0)
+\end{equation}
+\subsection{}
+\begin{equation}
+        \sqrt{\frac{1}{2\pi}}\int_{-\infty}^\infty \delta(x) \exp(-ikx)\text{d}x = \sqrt{\frac{1}{2\pi}}\int_{-\infty}^\infty \lim_{\sigma \to 0}\frac{1}{\sqrt{2\pi\sigma^2}}\exp(\frac{-x^2}{2\sigma^2}) \exp(-ikx)\text{d}x = 
+\end{equation}
+\begin{equation}
+        = \sqrt{\frac{1}{2\pi}}\lim_{\sigma \to 0}\int_{-\infty}^\infty \frac{1}{\sqrt{2\pi\sigma^2}}\exp(\frac{-x^2}{2\sigma^2}) \exp(-ikx)\text{d}x \overset{3.1}{=} \sqrt{\frac{1}{2\pi}}\lim_{\sigma \to 0} \exp(-4\sigma^2k^2) = \sqrt{\frac{1}{2\pi}}
+\end{equation}
 \end{document}
