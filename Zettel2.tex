@@ -112,6 +112,7 @@ Folgt durch Anwendung von 1.1, 1.2 und erneut 1.1.
 \section{Fouriertransformation}
 
 \subsection{}
+\subsubsection{$f(x) = \frac{1}{\sqrt{2\pi\sigma^2}}\exp(\frac{-x^2}{2\sigma^2})$}
 \begin{equation}
         \hat{f}(k) = \int_{-\infty}^\infty \frac{1}{\sqrt{2\pi\sigma^2}}\exp(\frac{-x^2}{2\sigma^2}) \exp(-ikx)\text{d}x = \int_{-\infty}^\infty \frac{1}{\sqrt{2\pi\sigma^2}}\exp(-(\frac{x^2}{2\sigma^2} + ikx))\text{d}x
 \end{equation}
@@ -123,6 +124,22 @@ Das Ergebnis folgt mit den Gaußschen Fehlerintegral:
 \begin{equation}
         \hat{f}(k) = \frac{1}{\sqrt{2\pi\sigma^2}}\exp(-4k^2\sigma^2) \frac{\sqrt{\pi}}{\sqrt{\frac{1}{2\sigma^2}}} = \exp(-4\sigma^2k^2)
 \end{equation}
+
+\subsubsection{$f(x) = \frac{\sigma}{2}\exp(-\sigma|x|)$}
+
+\begin{equation}
+        \hat{f}(k) = \int_{-\infty}^\infty \frac{\sigma}{2}\exp(-\sigma|x|) \exp(-ikx)\text{d}x = 
+\end{equation}
+\begin{equation}
+        = \int_0^\infty\frac{\sigma}{2}\exp(-\sigma x) \exp(-ikx)\text{d}x + \int_0^\infty\frac{\sigma}{2}\exp(-\sigma x) \exp(ikx)\text{d}x = 
+\end{equation}
+\begin{equation}
+        = \frac{\sigma}{2} (\int_0^\infty\exp(-(\sigma + ik)x)\text{d}x + \int_0^\infty\exp(-(\sigma - ik)x)\text{d}x) = 
+\end{equation}
+\begin{equation}
+        = \frac{\sigma}{2} (\frac{1}{\sigma + ik} + \frac{1}{\sigma - ik}) = \frac{\sigma^2}{\sigma^2 - k^2}
+\end{equation}
+
 \section{Dirac-Delta-Funktion (-Distribution)}
 
 \subsection{}
