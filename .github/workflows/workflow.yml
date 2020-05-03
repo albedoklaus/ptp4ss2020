@@ -19,7 +19,7 @@ jobs:
           key: texlive
       - name: Install TeX Live
         run: |
-          PATH="${PATH}:$(cd /usr/local/texlive/*/bin/* && pwd)"
+          PATH="${PATH}:$(cd /usr/local/texlive/*/bin/* && pwd)" || true
           [ -x "$(command -v tlmgr)" ] && {
             printf '%s\n' "Using cached installation of TeX Live"
             exit
@@ -36,7 +36,7 @@ jobs:
           tlmgr install latexmk biber texliveonfly
       - name: Install pandoc
         run: |
-          PATH="${PATH}:$(cd /usr/local/texlive/*/bin/* && pwd)"
+          PATH="${PATH}:$(cd /usr/local/texlive/*/bin/* && pwd)" || true
           [ -x "$(command -v pandoc)" ] && {
             printf '%s\n' "Using cached installation of pandoc"
             exit
