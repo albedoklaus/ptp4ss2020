@@ -12,8 +12,18 @@ jobs:
           apt install -y git hub perl python wget
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Cache
+        uses: actions/cache@v1
+        with:
+          path: /usr/local/texlive
+          key: texlive
       - name: Install TeX Live
         run: |
+          PATH="${PATH}:$(cd /usr/local/texlive/*/bin/* && pwd)"
+          [ -x "$(command -v tlmgr)" ] && {
+            printf '%s\n' "Using cached installation of TeX Live"
+            exit
+          }
           temp="$(mktemp -d)"
           url=http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
           wget -qO - "$url" | tar --strip-components=1 -C "$temp" -xzvf -
@@ -26,12 +36,16 @@ jobs:
           tlmgr install latexmk biber texliveonfly
       - name: Install pandoc
         run: |
+          PATH="${PATH}:$(cd /usr/local/texlive/*/bin/* && pwd)"
+          [ -x "$(command -v pandoc)" ] && {
+            printf '%s\n' "Using cached installation of pandoc"
+            exit
+          }
           temp="$(mktemp -d)"
           url=https://api.github.com/repos/jgm/pandoc/releases/latest
-          url="$(wget -qO - "$url" | tr '"' '\n' | grep '.*/download/.*-amd64.deb')"
-          filename="$temp/pandoc-latest-amd64.deb"
-          wget -O "$filename" "$url"
-          dpkg -i "$filename"
+          url="$(wget -qO - "$url" | tr '"' '\n' | grep '.*/download/.*-linux-amd64.tar.gz')"
+          wget -qO - "$url" | tar --strip-components=1 -C "$temp" -xzvf -
+          mv "$temp/bin/"* "$(cd /usr/local/texlive/*/bin/* && pwd)"
       - name: Convert Markdown to TeX with pandoc
         run: |
           PATH="${PATH}:$(cd /usr/local/texlive/*/bin/* && pwd)"
