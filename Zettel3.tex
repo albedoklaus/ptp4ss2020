@@ -1,0 +1,137 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[margin=30mm,right=30mm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath, amssymb}
+\usepackage{bbold}
+\usepackage{braket}
+
+\newcount\colveccount
+\newcommand*\colvec[1]{
+        \global\colveccount#1
+        \begin{pmatrix}
+        \colvecnext
+}
+\def\colvecnext#1{
+        #1
+        \global\advance\colveccount-1
+        \ifnum\colveccount>0
+                \\
+                \expandafter\colvecnext
+        \else
+                \end{pmatrix}
+        \fi
+}
+
+\title{Übungsblatt 3 - PTP4}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Erhaltung der Teilchendichte}
+
+\section{Vollständigkeit der Paulimatrizen und magnetische Präzession}
+
+\subsection{}
+Für die Observable $m$ zugehörig zur Matrix $M$ gilt:
+\begin{align}
+        \begin{split}
+                m &= (\alpha^*, \beta^*) \cdot M \cdot \colvec{2}{\alpha}{\beta} \\
+                  &= (\alpha^*, \beta^*) \cdot \colvec{2}{m_{11}\alpha + m_{12}\beta}{m_{21}\alpha + m_{22}\beta} \\
+                  &= m_{11}\alpha\alpha^* + m_{12}\beta\alpha^* + m_{21}\alpha\beta^* + m_{22}\beta\beta^* \\
+                  &= m_{11}|\alpha|^2 + m_{12}\beta\alpha^* + m_{21}\alpha\beta^* + m_{22}|\beta|^2 \\     
+        \end{split}
+\end{align}
+Aus der Bedingung $m \in \mathbb{R}$ folgt mit $|\alpha|^2, |\beta|^2 \in \mathbb{R}$, dass im Allgemeinen $m_{11}, m_{22} \in \mathbb{R}$ gelten muss.
+Somit gilt:
+\begin{align}
+        \begin{split}
+                (m_{12}\beta\alpha^* + m_{21}\alpha\beta^*) &\in \mathbb{R} \\
+                \Rightarrow m_{12}\beta\alpha^* + m_{21}\alpha\beta^* &= (m_{12}\beta\alpha^* + m_{21}\alpha\beta^*)^* \\
+                                                                      &= m_{12}^*\beta^*\alpha + m_{21}^*\alpha^*\beta \\
+        \end{split}
+\end{align}
+\begin{align}
+        \begin{split}
+        \text{Koeffizientenvergleich} \Rightarrow m_{12}^* &= m_{21}, \\
+                                                  m_{21}^* &= m_{12} \\
+        \end{split}
+\end{align}
+
+\subsection{}
+\begin{align}
+        N \text{hermitesch} \Rightarrow N &= \begin{pmatrix} n_1 & n_3^* \\ n_3 & n_2 \\ \end{pmatrix}, n_1, n_2 \in \mathbb{R}, n_3 \in \mathbb{C} \\
+                                          &= a\sigma_x + b\sigma_y + c\sigma_z + d\sigma_4, a, b, c, d \in \mathbb{R}
+\end{align}
+Hieraus folgt direkt:
+\begin{align}
+        \begin{split}
+                n_1 &= c + d[\sigma_4]_{11} \\
+                n_2 &= -c + d[\sigma_4]_{22} \\
+                n_3 &= a + ib + d[\sigma_4]_{21} \\
+              n_3^* &= a -ib + d[\sigma_4]_{12} \\
+        \end{split}
+\end{align}
+\begin{align}
+        \begin{split}
+                &\Rightarrow \text{Setze} [\sigma_4]_{12} = [\sigma_4]_{21} = 0 \\
+                &\Rightarrow \text{Setze} [\sigma_4]_{11} = [\sigma_4]_{22} = 1 \\
+                &\Rightarrow \sigma_4 = \begin{pmatrix} 1 & 0 \\ 0 & 1\\ \end{pmatrix}
+        \end{split}
+\end{align}
+\begin{align}
+        \begin{split}
+                m &= (\alpha^*, \beta^*) \cdot \sigma_4 \cdot \colvec{2}{\alpha}{\beta} \\
+                  &= (\alpha^*, \beta^*) \cdot \colvec{2}{\alpha}{\beta} \\
+                  &= \alpha^*\alpha + \beta^*\beta \\
+                  &= |\alpha|^2 + |\beta|^2 = 1 \\
+        \end{split}
+\end{align}
+
+\subsection{}
+\begin{align}
+        \begin{split}
+                H &= -\mu_0 (\sigma_x\hat{x} + \sigma_y\hat{y} + \sigma_z\hat{z})\cdot\vec{B} \\
+                  \vec{B} &= \colvec{3}{0}{0}{B_z}\Rightarrow H_z = -\mu_0B_z\sigma_z \\
+        \end{split}
+\end{align}
+Die Vektoren $\colvec{2}{1}{0}$ und $\colvec{2}{0}{1}$ sind Eigenvektoren von $H_z$. Beweis:
+\begin{align}
+        \begin{split}
+                H_z \cdot \colvec{2}{1}{0} &= \begin{pmatrix} -\mu_0B_z & 0 \\ 0 & \mu_0B_z\\ \end{pmatrix}\cdot\colvec{2}{1}{0} = -\mu_0B_z \colvec{2}{1}{0} \\
+                H_z \cdot \colvec{2}{0}{1} &= \begin{pmatrix} -\mu_0B_z & 0 \\ 0 & \mu_0B_z\\ \end{pmatrix}\cdot\colvec{2}{0}{1} = \mu_0B_z \colvec{2}{0}{1} \\
+        \end{split}
+\end{align}
+Daraus ergibt sich die Zeitentwicklung des allgemeinen Zustands $\colvec{2}{\alpha}{\beta}$ als Überlagerung der zeitentwickelten Eigenzustände zu $H_z$:
+\begin{align}
+        \begin{split}
+                \colvec{2}{\alpha}{\beta}(t) &= \alpha\colvec{2}{1}{0}(t) + \beta\colvec{2}{0}{1}(t) \\
+                                             &= \alpha\colvec{2}{1}{0}U(t, 0) + \beta\colvec{2}{0}{1}U(t, 0) \\
+        \end{split}
+\end{align}
+wobei $U(t, 0)$ der Zeitentwicklungsoperator ist, wobei o.B.d.A. $t'=0$ gesetzt wurde. Der Zeitentwicklungsoperator stellt eine Rotation des Einheitsvektors in der komplexen Ebene dar.
+Insbesondere rotieren beide Energieeigenzustände mit derselben Frequenz und führen somit zu einer Rotation des allgemeinen Zustands. Dies lässt sich als Präzession interpretieren.
+
+\subsection{}
+Da sich die gesamte Zeitentwicklung des Systems im Zeitentwicklungsoperator befindet, ist es ausreichend nur diesen im Folgenden zu betrachten.
+Mit dem gegebenen Hinweis und der Erkenntnis, dass $\sigma_z^2 = \mathbb{1}$ und $\mathbb{1}^n = \mathbb{1} \forall n \in \mathbb{R}$ folgt:
+\begin{align}
+        \begin{split}
+                U(t, 0) &= \exp\left(-\frac{i}{\hbar}H_zt\right) \\
+                        &= \sum_{k=0}^\infty \frac{1}{k!}\left(-\frac{i}{\hbar} H_zt\right)^k \\
+                        &= \sum_{k=0}^\infty \frac{1}{k!}\left(-\frac{i}{\hbar} (-\mu_0B_z\sigma_z)t\right)^k \\
+                        &= \sum_{k=0}^\infty \frac{1}{k!}\left(\frac{i\mu_0B_z}{\hbar}t\right)^k \sigma_z^k \\
+                        &= \sum_{k=0}^\infty \frac{1}{k!}\left(\frac{i\mu_0B_z}{\hbar}t\right)^k (\sigma_z^2)^\frac{k}{2} \\
+                        &= \sum_{k=0}^\infty \frac{1}{k!}\left(\frac{i\mu_0B_z}{\hbar}t\right)^k \mathbb{1}^\frac{k}{2} \\
+                        &= \sum_{k=0}^\infty \frac{1}{k!}\left(\frac{i\mu_0B_z}{\hbar}t\right)^k \\
+                        &= \exp\left(\frac{i\mu_0B_z}{\hbar}t\right) \\
+        \end{split}
+\end{align}
+Es gilt $exp(0) = exp(i2\pi) = 1$ und somit gilt für die Periodendauer $T$ der Präzession:
+\begin{align}
+        2\pi = \frac{i\mu_0B_z}{\hbar}T \Rightarrow T = \frac{2\pi\hbar}{i\mu_0B_z} \Rightarrow f = \frac{1}{T} = \frac{i\mu_0B_z}{2\pi\hbar}
+\end{align}
+\end{document}
