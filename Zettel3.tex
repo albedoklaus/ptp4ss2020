@@ -33,6 +33,40 @@
 
 \section{Erhaltung der Teilchendichte}
 
+\subsection{}
+Für eine allgemeine Wellenfunktion $\psi$ gilt:
+\begin{align}
+        \psi(t, x) = A\exp(ikx -i\omega t) \Rightarrow \psi(t, x)^* = A\exp((ik)^*x - (i\omega)^*t)
+\end{align}
+\begin{align}
+        \begin{split}
+                \partial_t \int_{x_0}^{x_1} \rho(t, x)\text{d}x &\overset{!}{=} j(t, x_0) - j(t, x_1) \\
+                \partial_t \int_{x_0}^{x_1} \psi(t, x)^*\psi(t, x)\text{d}x &= \left\lbrack\frac{i\hbar}{2m}\left(\left(\partial_x \psi(t, x)^*\right)\psi(t, x) - \psi(t, x)^*\left(\partial_x\psi(t, x)\right)\right)\right\rbrack_{x_1}^{x_0} \\
+                \partial_t \frac{1}{(ik)^* + ik} [\psi(t, x)^*\psi(t, x)]_{x_0}^{x_1} &= \left\lbrack\frac{i\hbar}{2m}\left((ik)^*\psi(t, x)^*\psi(t, x) - ik\psi(t, x)^*\psi(t, x)\right)\right\rbrack_{x_1}^{x_0} \\
+                -\frac{(i\omega)^* + i\omega}{(ik)^* + ik} [\psi(t, x)^*\psi(t, x)]_{x_0}^{x_1} &= \left\lbrack\frac{i\hbar}{2m}((ik)^* - ik)\psi(t, x)^*\psi(t, x)\right\rbrack_{x_1}^{x_0} \\
+                -\frac{(i\omega)^* + i\omega}{(ik)^* + ik} [\psi(t, x)^*\psi(t, x)]_{x_0}^{x_1} &= -\frac{i\hbar}{2m}((ik)^* - ik)[\psi(t, x)^*\psi(t, x)]_{x_0}^{x_1} \\
+                \frac{(i\omega)^* + i\omega}{(ik)^* + ik} &= \frac{i\hbar}{2m}((ik)^* - ik) \\
+                (i\omega)^* + i\omega &= \frac{i\hbar}{2m}((ik)^* - ik)((ik)^* + ik) \\
+                (i\omega)^* + i\omega &= \frac{i\hbar}{2m}(((ik)^*)^2 - (ik)^2) \\
+                (i\omega)^* + i\omega &= -\frac{i\hbar}{2m}((k^*)^2 - k^2) \\
+        \end{split}
+\end{align}
+Erfülle $\psi(t, x)$ die Schrödingergleichung, so gilt:
+\begin{align}
+        \omega = \frac{E}{\hbar} \Rightarrow \omega^* = \omega, k^2 = \frac{2m}{\hbar^2}(E-V(x)) \Rightarrow (k^*)^2 = \frac{2m}{\hbar^2}(E-V(x))^*
+\end{align}
+Hieraus folgt somit:
+\begin{align}
+        \begin{split}
+                &\partial_t \int_{x_0}^{x_1} \rho(t, x)\text{d}x \overset{!}{=} j(t, x_0) - j(t, x_1) \\
+                &\Leftrightarrow (i\omega)^* + i\omega = -\frac{i\hbar}{2m}((k^*)^2 - k^2) \\
+                &\Leftrightarrow 0 = ((k^*)^2 - k^2) \\
+                &\Leftrightarrow k^2 = (k^*)^2 \\
+                &\Leftrightarrow (E-V(x)) = (E-V(x))^* \\
+                &\Leftrightarrow V(x) = V(x)^* \\
+        \end{split}
+\end{align}
+
 \section{Vollständigkeit der Paulimatrizen und magnetische Präzession}
 
 \subsection{}
