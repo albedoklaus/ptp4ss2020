@@ -52,24 +52,13 @@
 \begin{equation}
 \begin{aligned}
 p_n &= \frac{1}{Z} \exp \left( -\frac{E_n}{k_B T} \right) \\
-    &= \frac{1}{\sum_{n=1}^N \exp \left( -\frac{E_n}{k_B T} \right)} \exp \left( -\frac{E_n}{k_B T} \right)
-\end{aligned}
-\end{equation}
-
-Für Dublett $N=2$:
-\begin{equation}
-\begin{aligned}
-p_n &= \frac{1}{\sum_{n=1}^2 \exp \left( -\frac{-\mu_0 \left( n-1-\frac{2-1}{2} \right) B }{k_B T} \right)} \exp \left( -\frac{-\mu_0 \left( n-1-\frac{2-1}{2} \right) B}{k_B T} \right) \\
-    &= \frac{1}{\sum_{n=1}^2 \exp \left( -\frac{-\mu_0 \left( n-\frac{3}{2} \right) B }{k_B T} \right)} \exp \left( -\frac{-\mu_0 \left( n-\frac{3}{2} \right) B}{k_B T} \right) \\
-    &= \frac{1}{\sum_{n=1}^2 \exp \left( \frac{\mu_0 n B }{k_B T} \right)\exp \left( -\frac{\mu_0 \frac{3}{2} B }{k_B T} \right)} \exp \left( \frac{\mu_0 n B }{k_B T} \right)\exp \left( -\frac{\mu_0 \frac{3}{2} B }{k_B T} \right) \\
-    &= \frac{\exp \left( \frac{\mu_0 n B }{k_B T} \right)}{\sum_{n=1}^2 \exp \left( \frac{\mu_0 n B }{k_B T} \right)} \\
-\end{aligned}
-\end{equation}
-
-Und analog für Triplett $N=3$:
-\begin{equation}
-\begin{aligned}
-p_n &= \frac{\exp \left( \frac{\mu_0 n B }{k_B T} \right)}{\sum_{n=1}^3 \exp \left( \frac{\mu_0 n B }{k_B T} \right)} \\
+    &= \frac{1}{\sum_{m=1}^N \exp \left( -\frac{E_m}{k_B T} \right)} \exp \left( -\frac{E_n}{k_B T} \right) \\
+    &= \frac{1}{\sum_{m=1}^N \exp \left( -\frac{-\mu_0 \left( m-1-\frac{N-1}{2} \right) B }{k_B T} \right)} \exp \left( -\frac{-\mu_0 \left( n-1-\frac{N-1}{2} \right) B}{k_B T} \right) \\
+    &= \frac{1}{\sum_{m=1}^N \exp \left( \frac{\mu_0 \left( m-\frac{N+1}{2} \right) B }{k_B T} \right)} \exp \left( \frac{\mu_0 \left( n-\frac{N+1}{2} \right) B}{k_B T} \right) \\
+    &= \frac{1}{\sum_{m=1}^N \exp \left( \frac{\mu_0 m B }{k_B T} \right)\exp \left( -\frac{\mu_0 \frac{N+1}{2} B }{k_B T} \right)} \exp \left( \frac{\mu_0 n B }{k_B T} \right)\exp \left( -\frac{\mu_0 \frac{N+1}{2} B }{k_B T} \right) \\
+    &= \frac{1}{\exp \left( -\frac{\mu_0 \frac{N+1}{2} B }{k_B T} \right)\sum_{m=1}^N \exp \left( \frac{\mu_0 m B }{k_B T} \right)} \exp \left( \frac{\mu_0 n B }{k_B T} \right)\exp \left( -\frac{\mu_0 \frac{N+1}{2} B }{k_B T} \right) \\
+    &= \frac{\exp \left( \frac{\mu_0 n B }{k_B T} \right)}{\sum_{m=1}^N \exp \left( \frac{\mu_0 m B }{k_B T} \right)} \\
+    &= \frac{1}{\sum_{m=1}^N \frac{ \exp \left( \frac{\mu_0 m B }{k_B T} \right)}{ \exp \left( \frac{\mu_0 n B }{k_B T} \right)} } \\
 \end{aligned}
 \end{equation}
 
