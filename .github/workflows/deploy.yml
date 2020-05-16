@@ -1,0 +1,14 @@
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: python3
+    container:
+      image: debian:buster
+    steps:
+      - name: Install dependencies
+        run: |
+          print("hello")
